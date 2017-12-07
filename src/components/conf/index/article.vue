@@ -1,6 +1,6 @@
 <template>
 	<ul>
-		<li class='list' v-for="(article,index) in articles" :key="index" @click="pushArticleInfo()">
+		<li class='list' v-for="(article,index) in articles" :key="index" @click="">
 			<p class="list-top"><a href="#" class="author"><span>{{ article.author }}</span></a><span class="time"> - {{ article.time}}</span></p>
 			<h2 class="title"><a href="#">{{ article.title }}</a></h2>
 			<div class="small-text-group">			
@@ -16,13 +16,13 @@
 	</ul>
 </template>
 <script>
-
+	import { mapState } from 'vuex'
 	export default {
-
+		computed: mapState({
+			articles: state => state.Article.articles
+		}),
 		methods: {
-			pushArticleInfo: function() {
-				this.$router.push({ name: 'Home', params: { articleId: 123 }})
-			}
+
 		}
 	}
 </script>

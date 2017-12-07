@@ -2,25 +2,27 @@
     <el-col :span="4">
         <el-menu mode="vertical" default-active="1" class="mod-left">
             <router-link to="/index">
-                <el-menu-item>
+                <el-menu-item index="首页">
                     <i class="el-icon-message"></i>首页
                 </el-menu-item>
             </router-link>
             <router-link to="/zhuanti">
-                <el-menu-item>
+                <el-menu-item index="专题">
                     <i class="el-icon-menu"></i>专题
                 </el-menu-item>
             </router-link>
             <router-link to="/download">
-                <el-menu-item>
+                <el-menu-item index="下载手机应用">
                     <i class="el-icon-setting"></i>下载手机应用
                 </el-menu-item>
             </router-link>
             <el-menu class="left-bottm">
-                <el-menu-item>
-                    <i class="el-icon-message"></i>显示模式</el-menu-item>
-                <el-menu-item>
-                    <i class="el-icon-menu"></i>登录</el-menu-item>
+                <el-menu-item index="显示模式">
+                    <i class="el-icon-message"></i>显示模式
+                </el-menu-item>
+                <el-menu-item index="登录">
+                    <i class="el-icon-menu"></i>登录
+                </el-menu-item>
             </el-menu>
         </el-menu>
     </el-col>
@@ -29,12 +31,12 @@
 <script>
 export default {
     methods: {
-        handleOpen(key, keyPath) {
-            console.log(key, keyPath);
-        },
-        handleClose(key, keyPath) {
-            console.log(key, keyPath);
-        }
+        // handleOpen(key, keyPath) {
+        //     console.log(key, keyPath);
+        // },
+        // handleClose(key, keyPath) {
+        //     console.log(key, keyPath);
+        // }
     }
 }
 </script>
