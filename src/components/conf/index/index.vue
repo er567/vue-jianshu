@@ -1,10 +1,10 @@
 <template>
 	<el-row>
-		<left :bus="bus"></left>
+		<left></left>
 		<transition name="fade" mode="out-in">
 			<router-view></router-view>
 		</transition>
-		<right :bus="bus"></right>
+		<right></right>
 	</el-row>
 </template>
 

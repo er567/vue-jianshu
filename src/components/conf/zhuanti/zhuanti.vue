@@ -22,13 +22,75 @@
                     <span class="search-icon"><i class="fa fa-search"></i></span>
                 </span>
             </nav>
+			<h2 class="ui-title">剩余调休时长查询</h2>
+			<el-form :inline="true" :model="form" class="mod-form-inline">
+				<el-form-item label="员工编号">
+					<el-input placeholder="请输入员工号" v-model="form.empCode" clearable></el-input>
+				</el-form-item>
+				<el-form-item label="密码">
+					<el-input placeholder="请输入密码" v-model="form.password" type="password" clearable></el-input>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="primary" @click="onSubmit">查询</el-button>
+				</el-form-item>
+			</el-form>
         </section>
     </el-col>
 </template>
 <script>
   export default {
+	data() {
+		return {
+			loginUrl:'http://192.168.245.46/Home/LoginNew',
+			searchUrl:'http://192.168.245.46/BPM/PSGetLeaveCheck',
+			form:{
+				empCode:'',
+				password:''
+			}
+		}
+	},
     methods: {
-     
+		onSubmit:function (){
+			let self = this,
+			loginData = {
+				userName:self.form.empCode,
+				password:self.form.password,
+				btnLogin:'登录'
+			},
+			postData = {  
+				empCode : self.form.empCode,  
+				vocationType : 250433,
+				vacationStart : '2017-12-01',
+				vocationEnd : '2017-12-31',
+				startPeriod : 1,
+				endPeriod : 10
+			}
+			// self.$ajax.get('http://t.com/1',postData).then(res=>{
+			// 	if(res.error==0){
+			// 		console.log(res);
+			// 	}else{
+			// 		this.$message({
+			// 			type:'error',
+			// 			message:res.msg
+			// 		})
+			// 	}
+			// })
+			if(self.form.empCode&&self.form.password){
+				self.$ajax.post(self.loginUrl,loginData).then(res=>{
+
+					self.$ajax.post(self.searchUrl,postData).then(res=>{
+						if(!res.rsData.message){
+							self.$message.error('请求失败！');
+						}
+						let msg = res.rsData.message.split(',')[0];
+						self.$message.success(msg);
+					})
+					
+				})
+			}else{
+				self.$message.error('请输入正确的用户名和密码!');
+			}
+		}
     }
   }
 </script>
@@ -111,7 +173,8 @@
 		}
 	}
 }
-.mod-demo {
-	color: red;
+.ui-title,
+.mod-form-inline{
+	margin:22px 0 0 22px;
 }
 </style>

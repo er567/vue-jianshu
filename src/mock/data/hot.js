@@ -9,3 +9,11 @@ Mock.mock(baseUrl + '/0', function(opt) {
         data
     }
 });
+for(var i=2;i<10;i++){
+    Mock.mock(baseUrl + '/' + i, function(opt) {
+        // var param = sessionStorage.getItem(opt.url);
+        return {
+            data
+        }
+    });
+}

@@ -10,11 +10,28 @@ import Vue from 'vue'
 import Promise from 'promise'
 import axios from 'axios'
 import jsonp from 'jsonp';
+import querystring from 'querystring';
+import { Message } from 'element-ui'
 var isPro = (process.env.NODE_ENV === 'production');
+(axios.defaults.withCredentials=true); 
+
 var ajax = function(type, url, data) {
-    !isPro && sessionStorage.setItem(url, JSON.stringify(data));
+    if (!isPro) {
+        sessionStorage.setItem(url, JSON.stringify(data));
+        type = 'post'
+    };
+    if (type == 'post') {
+        data = querystring.stringify(data);
+    }
+    if (type == 'get') {
+        data = {
+            params: data
+        }
+    }
     return axios[type](url, data).then((res) => {
         return res.data;
+    }).catch((err)=>{
+        Message.error(err.message)
     })
 }
 
