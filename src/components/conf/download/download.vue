@@ -19,7 +19,7 @@
         <div class="app-img"></div>
     </div>
 </template>
-<style>
+<style scoped lang="scss">
 	.download_container{
 		width: calc(100% + 200px);
 		height: 100%;
@@ -79,7 +79,7 @@
 	.download_btn a{
 		border-radius: 5px;
 		text-align: center;
-		line-height: 58px;
+		line-height: 45px;
 		display: inline-block;
 		background-color: #8EF2A4;
 		color: #ffffff;

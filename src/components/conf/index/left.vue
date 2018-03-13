@@ -20,9 +20,11 @@
                 <el-menu-item index="显示模式">
                     <i class="el-icon-message"></i>显示模式
                 </el-menu-item>
+            <router-link to="/login">
                 <el-menu-item index="登录">
                     <i class="el-icon-menu"></i>登录
                 </el-menu-item>
+            </router-link>
             </el-menu>
         </el-menu>
     </el-col>

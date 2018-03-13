@@ -16,6 +16,10 @@ const router = new Router({
     path: '/',
     redirect: '/index',
     hidden: true,
+    },{
+        path: '/login',
+        component: resolve => require(['@/components/conf/login/login.vue'], resolve),
+        hidden: true
     }]
 })
 
