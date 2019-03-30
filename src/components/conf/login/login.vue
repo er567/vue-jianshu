@@ -17,7 +17,7 @@
                     <input type="checkbox" value="true" checked="checked" name="session[remember_me]" id="session_remember_me"><span>记住我</span>
                     </div>
                     <div class="forget-btn">
-                        <a class="" data-toggle="dropdown" href="">登录遇到问题?</a>
+                        <a class="" data-toggle="dropdown" href="">{{isActive?'登录':'注册'}}遇到问题?</a>
                         <ul class="dropdown-menu" style="display:none;">
                             <li><a href="/users/password/mobile_reset">用手机号重置密码</a></li>
                             <li><a href="/users/password/email_reset">用邮箱重置密码</a></li>
@@ -27,9 +27,9 @@
                     </div>
                 </div>
                 <div>
-                    <button class="login-btn">登录</button>
-                </div>
+              </div>
             </el-form>
+            <button class="login-btn" @click="register">{{isActive?'登录':'注册'}}</button>
             <div class="more-sign">
                 <h6>社交帐号登录</h6>  
             </div>
@@ -49,8 +49,16 @@ export default {
   },
   methods:{
       changeLogin(){
-        this.isActive = !this.isActive;
-      }
+      this.isActive = !this.isActive;
+    },
+    register() {
+      this.$ajax.post('http://192.168.2.166:8000/api/v1/user/register/',{
+        username: this.accounts,
+        password: this.password
+      }).then((res)=>{
+        console.log(res)
+      })
+    }
   }
 };
 </script>

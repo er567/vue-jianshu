@@ -15,13 +15,19 @@ import { Message } from 'element-ui'
 var isPro = (process.env.NODE_ENV === 'production');
 (axios.defaults.withCredentials=true); 
 
-var ajax = function(type, url, data) {
+var ajax = function(type, url, data, headers) {
     if (!isPro) {
         sessionStorage.setItem(url, JSON.stringify(data));
         type = 'post'
     };
     if (type == 'post') {
-        data = querystring.stringify(data);
+        // let option = {
+        //     method: type,
+        //     headers: headers,
+        //     url: url,
+        //     data: querystring.stringify(data)
+        // }
+        data = querystring.stringify(data)
     }
     if (type == 'get') {
         data = {
@@ -37,9 +43,9 @@ var ajax = function(type, url, data) {
 
 //ajax
 Vue.prototype.$ajax = {
-    get: (url, data) => ajax('get', url, data),
-    post: (url, data) => ajax('post', url, data),
-    jsonp: (url, data) => {
+    get: (url, data, headers) => ajax('get', url, data, headers),
+    post: (url, data, headers) => ajax('post', url, data, headers),
+    jsonp: (url, data, headers) => {
         if (isPro) {
             return new Promise(
                 function(resolve, reject) {
@@ -49,7 +55,7 @@ Vue.prototype.$ajax = {
                 }
             )
         } else {
-            return ajax('get', url, data);
+            return ajax('get', url, data, headers);
         }
     }
 };
