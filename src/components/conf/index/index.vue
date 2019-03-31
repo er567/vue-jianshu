@@ -1,6 +1,6 @@
 <template>
 	<el-row>
-		<left></left>
+		<!-- <left></left> -->
 		<transition name="fade" mode="out-in">
 			<router-view></router-view>
 		</transition>
@@ -45,7 +45,7 @@ body {
 	height: 100%;
 }
 .rightbar {
-    width: 200px;
+    width: 15%;
     height: 100%;
     right: 0;
     position: fixed;
@@ -54,7 +54,7 @@ body {
 	top: 0;
 		nav {
 		padding: 15px 2px 5px 10px;
-		margin-right: 15px;
+		margin-right: 30px;
 		float: right;
 		font-size: 14px;
 		a{

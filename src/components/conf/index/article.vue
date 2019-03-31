@@ -1,6 +1,6 @@
 <template>
 	<ul>
-		<li class='list' v-for="(article,index) in articles" :key="index" @click="">
+		<li class='list' v-for="(article,index) in articles" :key="index">
 			<p class="list-top"><a href="#" class="author"><span>{{ article.author }}</span></a><span class="time"> - {{ article.time}}</span></p>
 			<h2 class="title"><a href="#">{{ article.title }}</a></h2>
 			<div class="small-text-group">			

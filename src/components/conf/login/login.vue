@@ -29,7 +29,8 @@
                 <div>
               </div>
             </el-form>
-            <button class="login-btn" @click="register">{{isActive?'登录':'注册'}}</button>
+            <button v-show="isActive" class="login-btn" @click="login">登录</button>
+            <button v-show="!isActive" class="login-btn" @click="register">注册</button>
             <div class="more-sign">
                 <h6>社交帐号登录</h6>  
             </div>
@@ -39,11 +40,13 @@
 
 <script>
 import Vue from "vue";
+let Base64 = require('js-base64').Base64;
 export default {
   data() {
     return {
       accounts: "",
       password: "",
+      token: "",
       isActive: true
     };
   },
@@ -57,6 +60,20 @@ export default {
         password: this.password
       }).then((res)=>{
         console.log(res)
+      })
+    },
+    login() {
+      let password = `${this.accounts}:${this.password}`
+      this.$ajax.post('http://192.168.2.166:8000/api/v1/user/login/',{
+        
+      },{
+        authorization: `Basic ${Base64.encode(password)}`
+      }).then((res)=>{
+        console.log(res)
+        this.token = res.token
+        this.$router.push({
+          path: '/'
+        })
       })
     }
   }
